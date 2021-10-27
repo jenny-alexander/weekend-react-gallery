@@ -18,6 +18,7 @@ router.put('/like/:id', (req, res) => {
 
 // GET Route
 router.get('/', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*"); //I added this - NOT SURE ABOUT IT YET
     res.send(galleryItems);
 }); // END GET Route
 
