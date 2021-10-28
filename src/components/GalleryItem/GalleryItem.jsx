@@ -53,11 +53,11 @@ function GalleryItem( props ) {
     return (
 
 
-        <div class="d-flex flex-column border rounded">
-            <div>
+        <div class="d-flex flex-column">
+            <div className="item">
                 { show ?
                     <img src={item.path} onClick={toggleItem} class="img-fluid"></img> :
-                    <p onClick={toggleItem}>{item.description}</p>
+                    <p id="description" onClick={toggleItem}>{item.description}</p>
                 }
             </div>
 
@@ -72,7 +72,6 @@ function GalleryItem( props ) {
                 <button className="countButton" onClick={() => increaseCount()}>love it!</button>
                 {/* <p className="countText">{setClickCountText()}</p> */}
                 <p className="countText">{getCountText()}</p>
-                <p>This is index no: {props.imageIndex}</p>
             </div>
 
         </div>

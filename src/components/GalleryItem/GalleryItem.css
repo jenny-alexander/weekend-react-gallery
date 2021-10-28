@@ -1,2 +1,18 @@
-
-
+.itemLikesInfo {
+    margin-top: 15px;
+}
+.countButton {
+    margin-bottom: 10px;
+}
+.item{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+img {
+    margin-top: 15px;
+    border: rgb(12, 11, 11) solid 1px;
+}
+#description {
+    font-size: 18px;
+    border: 1px solid black;
+}

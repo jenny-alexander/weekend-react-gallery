@@ -5,12 +5,15 @@ import GalleryItem from '../GalleryItem/GalleryItem';
 
 function GalleryList( props ) {
     return (
-        <div class="d-flex flex-row">
+        <div className="list">
+            <div class="d-flex flex-row">
             {
-                props.galleryItems.map( ( thisItem, index ) =>(
-                    <GalleryItem key={ thisItem.id } item={ thisItem } imageIndex={ index } imageCount={ props.galleryItems.length }/>
-                ) )
-            }
+                 props.galleryItems.map( ( thisItem, index ) =>(                 
+                     <GalleryItem key={ thisItem.id } item={ thisItem } imageIndex={ index } imageCount={ props.galleryItems.length }/>
+                 ) )
+             }
+           
+            </div>
         </div>
     )
 }
