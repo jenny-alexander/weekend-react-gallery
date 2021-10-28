@@ -20,9 +20,8 @@ function GalleryItem( props ) {
     }
 
     const increaseCount = ( )=>{
-        let likeCount = ++item.likes;
         setItem( {
-            ...item, likes: likeCount 
+            ...item, likes: ++item.likes 
         })
         //make a call to server via axios
         updatePhotoLikes();
@@ -37,7 +36,7 @@ function GalleryItem( props ) {
         });
     }    
 
-    const getClickCountText = ()=>{
+    const getCountText = ()=>{
         let text = `No people love this :(`;
         if( item.likes !== 0 ) {
             if( item.likes === 1 ) {
@@ -56,7 +55,6 @@ function GalleryItem( props ) {
                 <img src={item.path} onClick={ toggleItem }></img>:
                 <p onClick={ toggleItem }>{item.description}</p>
             }     
-            {/* <Button text="love it!" item={props.item}/> */}
             <div>
                 {/* <button onClick={ increaseCount }>love it!</button> 
                 TODO: (Ask about this) The code above was giving me a warning "Functions
@@ -66,7 +64,8 @@ function GalleryItem( props ) {
                 and I would get a lot of errors and nothing would appear on my screen. I think this is because
                 the function was getting executed when the button was added to the screen (rendered)...? */}
                 <button className="countButton" onClick={ () => increaseCount() }>love it!</button>
-                <p className="countText">{getClickCountText()}</p>
+                {/* <p className="countText">{setClickCountText()}</p> */}
+                <p className="countText">{getCountText()}</p>
             </div>
             
         </div>
