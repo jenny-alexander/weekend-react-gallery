@@ -56,9 +56,23 @@ function GalleryItem( props ) {
         }
         return text;
     }
-
+    //show the image, button and likes text on the screen
+    // return (
+    //     <div class="d-flex flex-column">
+    //         <div className="item">
+    //             { show ?
+    //                 <img src={item.path} onClick={toggleItem} class="img-fluid"></img> :
+    //                 <p id="description" onClick={toggleItem}>{item.description}</p>
+    //             }
+    //         </div>
+    //         <div className='itemLikesInfo'>
+    //             <button className="countButton" onClick={() => increaseCount()}>love it!</button>
+    //             <p className="countText">{getCountText()}</p>
+    //         </div>
+    //     </div>
+    //     )    
     return (
-        <div class="d-flex flex-column">
+        <div>
             <div className="item">
                 { show ?
                     <img src={item.path} onClick={toggleItem} class="img-fluid"></img> :
@@ -72,5 +86,6 @@ function GalleryItem( props ) {
         </div>
         )    
 }
+
 
 export default GalleryItem;

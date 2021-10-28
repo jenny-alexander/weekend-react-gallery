@@ -7,7 +7,7 @@ import GalleryItem from '../GalleryItem/GalleryItem';
 function GalleryList( props ) {
     return (
         <div className="list">
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-wrap">
             {
                  props.galleryItems.map( ( thisItem ) =>(                 
                      <GalleryItem key={ thisItem.id } item={ thisItem } />
@@ -17,5 +17,10 @@ function GalleryList( props ) {
             </div>
         </div>
     )
+
+    return (
+        <div>{createGrid()}</div>
+    )
+
 }
 export default GalleryList;

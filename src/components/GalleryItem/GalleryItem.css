@@ -10,9 +10,12 @@
 }
 img {
     margin-top: 15px;
-    border: rgb(12, 11, 11) solid 1px;
+    border: rgb(142, 142, 142) solid 1px;
+    max-width: 300px;
+    max-height: 200px;
 }
 #description {
     font-size: 18px;
-    border: 1px solid black;
+    border: 1px dashed rgb(201, 201, 201);
+    max-width: 200px;
 }
