@@ -3,8 +3,12 @@ import GalleryList from '../GalleryList/GalleryList';
 
 function Body( props ) {
     return( 
-    <div>
-        <GalleryList galleryItems={props.galleryItems} /> 
+    <div class="container">
+        <div class="d-flex flex-row">
+            <div className = "itemsList">
+                <GalleryList galleryItems={props.galleryItems} /> 
+            </div>
+        </div>
     </div>
     )
 }
