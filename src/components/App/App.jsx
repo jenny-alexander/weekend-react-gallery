@@ -1,31 +1,34 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import Body from '../Body/Body';
-import GalleryList from '../GalleryList/GalleryList';
-import GalleryItem from '../GalleryItem/GalleryItem';
-
-const api = axios.create({
-  baseURL: `http://localhost:5000/gallery`
-})
 
 function App() {
-    //get images from server using axios
-    let images = [];
+  const [ galleryItems, setGalleryItems ] = useState( [] );
 
-    api.get('/').then(res => {
-      console.log(res.data);
-      for (let i = 0; i < res.data.length; i++) {
-        images.push( res.data[i] );
-      }
+  useEffect( ()=>{
+      console.log('Component loaded');
+      getItems();
+  }, []); //<-- SUPER IMPORTANT to put this empty array in here.
+
+  const getItems=()=>{
+    axios.get( '/gallery' ).then( ( response )=>{
+      console.log( response.data );
+      setGalleryItems( response.data );
+
+    }).catch( ( err ) =>{
+      alert('error');
+      console.log(err);
     })
+  }
 
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
-        <Body imagesArray={images} />
+        <Body galleryItems={ galleryItems } />
       </div>
 
     );
