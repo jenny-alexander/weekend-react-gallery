@@ -12,9 +12,9 @@ function App() {
       getItems();
   }, []); //<-- SUPER IMPORTANT to put this empty array in here.
 
+  //get the items from the server using axios middleware call
   const getItems=()=>{
     axios.get( '/gallery' ).then( ( response )=>{
-      console.log( response.data );
       setGalleryItems( response.data );
 
     }).catch( ( err ) =>{
@@ -22,7 +22,7 @@ function App() {
       console.log(err);
     })
   }
-
+    //pass the array of items to the Body component for further processing/rendering
     return (
       <div className="App">
         <header className="App-header">

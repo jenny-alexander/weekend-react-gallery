@@ -8,6 +8,7 @@ function GalleryItem( props ) {
     const ONE_PERSON_LOVE = ` person loves this!`;
     const MANY_PEOPLE_LOVE = ` people love this!`;
 
+    //when the item is rendered on the screen it should be created with it's properties from the server
     const [ item, setItem ] = useState ( {
         id: props.item.id,
         path: props.item.path,
@@ -15,12 +16,15 @@ function GalleryItem( props ) {
         likes: props.item.likes
     });
 
-    const[show, setShow] = useState(  true );    
+    //set the 'show' state of the image or description
+    const[show, setShow] = useState(  true );   
 
+    //show or hide the image/desription depending on the value of show
     const toggleItem = () => {
         setShow( !show );
     }
 
+    //increase the number of loves by 1 each time a user clicks on the loves button
     const increaseCount = ( )=>{
         setItem( {
             ...item, likes: ++item.likes 
@@ -29,6 +33,8 @@ function GalleryItem( props ) {
         updatePhotoLikes();
     }
 
+    //update (PUT) the likes value for this item on the server
+    //use axios as middleware to the server
     const updatePhotoLikes = ( ) =>{
         axios.put( `/gallery/like/${item.id}`, item ).then( ( response )=>{
             console.log( response.data );
@@ -38,6 +44,7 @@ function GalleryItem( props ) {
         });
     }    
 
+    //determine the text to show on the screen - depends on how many people love the image
     const getCountText = ()=>{
         let text = NO_PEOPLE_LOVE;
         if( item.likes !== 0 ) {
@@ -51,8 +58,6 @@ function GalleryItem( props ) {
     }
 
     return (
-
-
         <div class="d-flex flex-column">
             <div className="item">
                 { show ?
@@ -60,20 +65,10 @@ function GalleryItem( props ) {
                     <p id="description" onClick={toggleItem}>{item.description}</p>
                 }
             </div>
-
             <div className='itemLikesInfo'>
-                {/* <button onClick={ increaseCount }>love it!</button>
-    TODO: (Ask about this) The code above was giving me a warning "Functions
-    are not valid as a React child". I think this is because the function returns something and I
-    wasn't putting that "thing" into anything (capturing it). I should check with Dev.
-    Also, if I put onClick={ increaseCount() }, it was looping (re-rendering) too many times
-    and I would get a lot of errors and nothing would appear on my screen. I think this is because
-    the function was getting executed when the button was added to the screen (rendered)...? */}
                 <button className="countButton" onClick={() => increaseCount()}>love it!</button>
-                {/* <p className="countText">{setClickCountText()}</p> */}
                 <p className="countText">{getCountText()}</p>
             </div>
-
         </div>
         )    
 }
