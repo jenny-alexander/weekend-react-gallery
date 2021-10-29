@@ -4,13 +4,14 @@
 }
 
 .App-header {
-  background-color: rgb(227, 234, 245);
+  background-color: rgb(237, 240, 245);
   padding: 1em;
   color: rgb(6, 6, 50);
+  border: 0.5px solid rgba(58, 58, 58, 0.297);
   margin-bottom: 1em;
 }
 
 .App-title {
-  font-size: 2em;
+  font-size: 2.5em;
 }
 
