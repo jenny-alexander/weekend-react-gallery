@@ -1,12 +1,14 @@
 .itemLikesInfo {
     margin-top: 15px;
 }
-.countButton {
-    margin-bottom: 15px;
+.itemImage{
+    margin-left: 40px;
+    margin-right: 40px;
+    border: 1px solid white;
 }
-.item{
-    margin-left: 25px;
-    margin-right: 25px;
+.btn {
+    margin-right: 3px;
+    margin-left: 3px;
 }
 img {
     margin-top: 15px;
@@ -16,8 +18,8 @@ img {
 }
 #description {
     font-size: 18px;
-    max-width: 200px;
     min-height: 200px;
+    max-width: 200px;
     padding-top: 50px;
 }
 .countText {

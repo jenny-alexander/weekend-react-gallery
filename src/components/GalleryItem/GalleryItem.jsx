@@ -37,7 +37,7 @@ function GalleryItem( props ) {
     //use axios as middleware to the server
     const updatePhotoLikes = ( ) =>{
         axios.put( `/gallery/like/${item.id}`, item ).then( ( response )=>{
-            console.log( response.data );
+            console.log( response.data );    
         }).catch( ( error ) =>{
             alert( 'error' );
             console.log( error );
@@ -58,18 +58,20 @@ function GalleryItem( props ) {
     }
   
     return (
-        <div>
-            <div className="item">
+        <div className="item">
+            <div className="itemImage">
                 { show ?
                     <img src={item.path} onClick={toggleItem} class="img-fluid img-thumbnail shadow"></img> :
                     <p id="description" onClick={toggleItem}>{item.description}</p>
                 }
             </div>
             <div className="itemLikesInfo">
-                <button className="countButton" class="btn btn-outline-dark" onClick={() => increaseCount()}>&hearts; love it!</button>
+                <button id="increaseCountButton" class="btn btn-sm btn-outline-dark" onClick={() => increaseCount()}>&hearts; love it!</button>
+                <button id="deleteItemButton" class="btn btn-sm btn-outline-dark" onClick={() => deleteItem()}>Delete image</button>
                 <p className="countText">{getCountText()}</p>
             </div>
         </div>
+        
         )    
 }
 

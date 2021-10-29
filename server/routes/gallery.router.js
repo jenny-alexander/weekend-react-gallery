@@ -4,21 +4,9 @@ const router = express.Router();
 // DB Connection
 const pool = require( '../modules/pool.js' );
 
-// PUT Route
-router.put('/like/:id', (req, res) => {
-    console.log(req.params);
-    const galleryId = req.params.id;
-    for(const galleryItem of galleryItems) {
-        if(galleryItem.id == galleryId) {
-            galleryItem.likes += 1;
-        }
-    }
-    res.sendStatus(200);
-}); // END PUT Route
-
 // GET Route
 router.get('/', (req, res) => {
-    const queryString = `SELECT * FROM items;`;
+    const queryString = `SELECT * FROM items ORDER BY id;`;
 
     pool.query( queryString ).then( ( results ) => {
         res.send( results.rows );
@@ -28,5 +16,28 @@ router.get('/', (req, res) => {
     })
 
 }); // END GET Route
+
+// PUT Route
+router.put('/like/:id', (req, res) => {
+    const queryString = `UPDATE items SET likes = ${req.body.likes}
+                         WHERE id = ${req.params.id}`;
+    pool.query( queryString ).then( (results )=>{
+        res.sendStatus( 200 );  
+    }).catch( (error )=>{
+        console.log( `PUT error is:`, error );
+        res.sendStatus( 500 );
+    })
+}); // END PUT Route
+
+//DELETE Route
+router.delete( '/', ( req, res )=>{
+    const queryString = `DELETE FROM items WHERE id='${req.query.id}';`;
+    pool.query( queryString ).then( ( results )=>{
+        res.sendStatus( 200 );
+    }).catch( ( error )=>{
+        console.log( error );
+        res.sendStatus( 500 );
+    })
+}) // END DELETE Route
 
 module.exports = router;
