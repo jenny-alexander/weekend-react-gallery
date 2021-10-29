@@ -14,7 +14,8 @@ function GalleryList( props ) {
             <div class="d-flex flex-wrap">
             {
                 props.galleryItems.map( ( thisItem ) =>(                 
-                    <GalleryItem key={ thisItem.id } item={ thisItem } itemDeleted= { ( itemDeleted )=> props.handleDelete( handleDelete( itemDeleted ) ) } />
+                    <GalleryItem key={ thisItem.id } item={ thisItem } 
+                                 itemDeleted= { ( itemDeleted )=> props.handleDelete( handleDelete( itemDeleted ) ) } />
                  ) )
              }
             </div>

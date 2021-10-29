@@ -24,7 +24,7 @@ function App() {
    Using the item id and item, delete the item from the gallery.
    Note: I tried to do the delete on the GalleryItem component but had trouble figuring out how to get the
    parent state to change from GalleryItem (this (state change) is needed in order for the page to refresh
-   after a delete and show the updated items from the db). Instead, I passed the item id back to parrent!
+   after a delete and show the updated items from the db). Instead, I passed the item id back to parent!
 */
   const handleDeleteEvent = ( item )=>{
       axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
@@ -37,6 +37,12 @@ function App() {
           console.log( error );
       })
   }
+
+  const handleAddEvent = ( item )=>{
+    axios.post( `/gallery`, item ).then( ( response )=>{
+
+    })
+  }
     //pass the array of items to the Body component for further processing/rendering
     return (
       <div className="App">
@@ -44,14 +50,18 @@ function App() {
           <h1 className="App-title">Gallery of Images</h1>
         </header>
 
-        <div class="container">
+
+
           <div class="d-flex flex-row">
               <div className = "itemsList">
-                  <GalleryList galleryItems={galleryItems} handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
+                  <GalleryList galleryItems={galleryItems} 
+                               handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
               </div>
           </div>
+
         </div>
-      </div>
+
+   
 
     );
 }
