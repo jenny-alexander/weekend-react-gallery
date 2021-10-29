@@ -30,8 +30,8 @@ router.put('/like/:id', (req, res) => {
 }); // END PUT Route
 
 //DELETE Route
-router.delete( '/', ( req, res )=>{
-    const queryString = `DELETE FROM items WHERE id='${req.query.id}';`;
+router.delete( '/delete/:id', ( req, res )=>{
+    const queryString = `DELETE FROM items WHERE id='${req.params.id}';`;
     pool.query( queryString ).then( ( results )=>{
         res.sendStatus( 200 );
     }).catch( ( error )=>{
