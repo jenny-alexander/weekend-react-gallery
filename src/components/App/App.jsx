@@ -2,35 +2,40 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-// import Body from '../Body/Body';
 import GalleryList from '../GalleryList/GalleryList';
 
 function App() {
   const [ galleryItems, setGalleryItems ] = useState( [] );
 
   useEffect( ()=>{
-      console.log('Component loaded');
       getItems();
   }, []); //<-- SUPER IMPORTANT to put this empty array in here.
 
   //get the items from the server using axios middleware call
   const getItems=()=>{
     axios.get( '/gallery' ).then( ( response )=>{
-      console.log(`in getItems()` );
       setGalleryItems( response.data );
-
     }).catch( ( err ) =>{
       alert('error');
       console.log(err);
     })
   }
-  const handleDeleteEvent = ( result )=>{
-    console.log (`in handleDeleteEvent in APP and result is:`, result )
-    if ( result === 'SUCCESS' ) {
-      alert( `Image deleted successfully`)
-      getItems();
-    } else
-      alert ( `Error deleting image!` );
+/* Get the item from the button click on grandchild component 'GalleryItem' and pass it back up to the App.
+   Using the item id and item, delete the item from the gallery.
+   Note: I tried to do the delete on the GalleryItem component but had trouble figuring out how to get the
+   parent state to change from GalleryItem (this (state change) is needed in order for the page to refresh
+   after a delete and show the updated items from the db). Instead, I passed the item id back to parrent!
+*/
+  const handleDeleteEvent = ( item )=>{
+      axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
+          console.log( response.data );
+          //TODO: Replace with SWAL
+          alert( `Image deleted successfully`)
+          getItems();
+      }).catch( ( error ) =>{
+          alert('error');
+          console.log( error );
+      })
   }
     //pass the array of items to the Body component for further processing/rendering
     return (
@@ -42,8 +47,7 @@ function App() {
         <div class="container">
           <div class="d-flex flex-row">
               <div className = "itemsList">
-                  <GalleryList galleryItems={galleryItems} handleDelete={ ( resultFromList ) =>{ handleDeleteEvent( resultFromList ) } }/> 
-                  {/* <GalleryList galleryItems={galleryItems}/>  */}
+                  <GalleryList galleryItems={galleryItems} handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
               </div>
           </div>
         </div>

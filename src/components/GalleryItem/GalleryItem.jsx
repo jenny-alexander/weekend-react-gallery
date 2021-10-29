@@ -34,20 +34,6 @@ function GalleryItem( props ) {
         updatePhotoLikes();
     }
 
-    const deleteItem = ( )=>{
-        axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
-            console.log( response.data );
-        }).catch( ( error ) =>{
-            alert('error');
-            console.log( error );
-        })
-        //TODO: The following return statement doesn't seem like the right way to do this. I want to be able to send
-        //a message of sorts back to the parent component (App). I just want to return something to trigger
-        //the handleDeleteEvent function get triggered in App. 
-        //I tried to set the "SUCCESS" message in the 'then' of the delete statement above but that didn't work
-        //and nothing was getting set (maybe because the return response happens too fast?). NEED TO ASK DEV.
-        return "SUCCESS"; 
-    }
     //update (PUT) the likes value for this item on the server
     //use axios as middleware to the server
     const updatePhotoLikes = ( ) =>{
@@ -72,6 +58,7 @@ function GalleryItem( props ) {
         return text;
     }
   
+    //render the output to the screen
     return (
         <div className="item">
             <div className="itemImage">
@@ -82,14 +69,12 @@ function GalleryItem( props ) {
             </div>
             <div className="itemLikesInfo">
                 <button id="increaseCountButton" class="btn btn-outline-dark" alt="like image" onClick={() => increaseCount()}>&hearts;</button>
-                {/* <button id="deleteItemButton" class="btn btn-outline-dark" alt="trash image" onClick={() => deleteItem()}>&#128465;</button> */}
-                <button id="deleteItemButton" class="btn btn-outline-dark" alt="trash image" onClick={ () => props.itemDeleted( deleteItem() ) }>&#128465;</button>
+                <button id="deleteItemButton" class="btn btn-outline-dark" alt="trash image" onClick={ () => props.itemDeleted( item ) }>&#128465;</button>
                 <p className="countText">{getCountText()}</p>
             </div>
         </div>
         
         )    
 }
-
 
 export default GalleryItem;
