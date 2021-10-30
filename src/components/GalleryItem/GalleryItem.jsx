@@ -25,6 +25,13 @@ function GalleryItem( props ) {
         setShow( !show );
     }
 
+    //create a new item
+    const createNewItem = ( newUrl, newDescription )=>{
+        setItem( {
+            ...item, path: newUrl, description: newDescription
+        })
+    }
+
     //increase the number of loves by 1 each time a user clicks on the loves button
     const increaseCount = ( )=>{
         setItem( {

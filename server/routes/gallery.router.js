@@ -17,6 +17,21 @@ router.get('/', (req, res) => {
 
 }); // END GET Route
 
+// POST Route
+router.post('/', ( req, res ) => {
+    console.log( `in POST ROUTE with:`, req.body );
+    const queryString = `INSERT INTO items (path, description )
+                            VALUES($1, $2);`;    
+    let values = [req.body.path, req.body.description];
+    console.log( `QuerySTring is:`, queryString );
+    console.log( `values are:`, values );
+    pool.query( queryString, values ).then( ( results )=>{
+        res.sendStatus( 201 );
+    }).catch( ( error )=>{
+            res.sendStatus( 500) ;
+       })
+})
+
 // PUT Route
 router.put('/like/:id', (req, res) => {
     const queryString = `UPDATE items SET likes = ${req.body.likes}

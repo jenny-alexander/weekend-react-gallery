@@ -15,7 +15,7 @@ function GalleryList( props ) {
             {
                 props.galleryItems.map( ( thisItem ) =>(                 
                     <GalleryItem key={ thisItem.id } item={ thisItem } 
-                                 itemDeleted= { ( itemDeleted )=> props.handleDelete( handleDelete( itemDeleted ) ) } />
+                                 itemDeleted= { ( itemDeleted )=> props.handleDelete( handleDelete( itemDeleted ) ) }/>
                  ) )
              }
             </div>

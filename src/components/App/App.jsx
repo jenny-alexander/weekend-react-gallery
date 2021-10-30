@@ -6,6 +6,8 @@ import GalleryList from '../GalleryList/GalleryList';
 
 function App() {
   const [ galleryItems, setGalleryItems ] = useState( [] );
+  const [ imageURL, setImageURL ] = useState( '' );
+  const [ imageDescription, setImageDescription ] = useState( '' );
 
   useEffect( ()=>{
       getItems();
@@ -13,6 +15,8 @@ function App() {
 
   //get the items from the server using axios middleware call
   const getItems=()=>{
+  console.log( `in getItems` );
+
     axios.get( '/gallery' ).then( ( response )=>{
       setGalleryItems( response.data );
     }).catch( ( err ) =>{
@@ -49,8 +53,13 @@ function App() {
       pass the item back up to the App.
   #6 - In App, we call handleAddEvent with the item that came from the GalleryItem.
   */
-  const handleAddEvent = ( item )=>{
-    axios.post( `/gallery`, item ).then( ( response )=>{
+  const handleAddEvent = ( ) =>{
+    console.log( `in handleAddEvent with:`, imageURL, imageDescription );
+    alert( `in handleAddEvent` );
+    
+    let newItem = createItemObject( imageURL, imageDescription );
+
+    axios.post( `/gallery`, newItem ).then( ( response )=>{
       alert(` Image added successfully!` );
       getItems();
     }).catch( ( error ) =>{
@@ -58,6 +67,29 @@ function App() {
       console.log( error );
     })
   }
+/**
+ * Create the task object to send to the database.
+ */
+  const createItemObject = ( imageURL, imageDescription ) => {
+    console.log( `in createIteamObject with:`, imageURL, imageDescription )
+    let item = {
+        id : '',
+        path: imageURL,
+        description: imageDescription,
+        likes: 0
+    };
+    console.log( `item to be returned is:`, item )
+  return item;
+}
+
+  const handleURLChange = ( event )=>{
+    setImageURL(event.target.value);
+    console.log( imageURL );
+  }
+  const handleDescriptionChange = ( event )=>{
+    setImageDescription(event.target.value);
+    console.log( imageDescription );
+  }  
     //pass the array of items to the Body component for further processing/rendering
     return (
       <div className="App">
@@ -69,17 +101,20 @@ function App() {
 
           <div className="itemInput">
             <form>
-              <div class="row g-2">
-                <div class="col-6">
-                  <input type="text" class="form-control" id="imageURL" placeholder="Enter image URL here"/>
+              <div class="row">
+                <div class="col-5">
+                  <input type="text" class="form-control" id="imageURL" placeholder="Enter image URL here"
+                          onChange= { ( event )=>handleURLChange ( event ) }/>
                 </div>
-                <div class="col-3">
-                  <input type="text" class="form-control" id="imageDescription" placeholder="Enter image description here"/>
+                <div class="col-5">
+                  <input type="text" class="form-control" id="imageDescription" placeholder="Enter image description here"
+                          onChange={ ( event )=>handleDescriptionChange( event ) }/>
                 </div>                
                 <div class="col-2">
-                  <button class="btn btn-outline-secondary" onClick={ handleAddEvent }>Add image</button>
+                  <button class="btn btn-outline-secondary" onClick={ handleAddEvent }>Add</button>
                 </div>
               </div>
+
             </form>
           </div>
 
@@ -87,7 +122,7 @@ function App() {
             <div class="d-flex flex-row">
                 <div className = "itemsList">
                     <GalleryList galleryItems={galleryItems} 
-                                handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
+                                 handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
                 </div>
             </div>
           </div>
