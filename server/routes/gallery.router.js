@@ -6,7 +6,7 @@ const pool = require( '../modules/pool.js' );
 
 // GET Route
 router.get('/', (req, res) => {
-    const queryString = `SELECT * FROM items ORDER BY id;`;
+    const queryString = `SELECT * FROM items ORDER BY id DESC;`;
 
     pool.query( queryString ).then( ( results ) => {
         res.send( results.rows );

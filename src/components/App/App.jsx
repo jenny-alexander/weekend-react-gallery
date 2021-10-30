@@ -18,10 +18,10 @@ function App() {
   console.log( `in getItems` );
 
     axios.get( '/gallery' ).then( ( response )=>{
-      setGalleryItems( response.data );
+      setGalleryItems( response.data );        
     }).catch( ( err ) =>{
       alert('error');
-      console.log(err);
+      console.log(err);       
     })
   }
 /* Get the item from the button click on grandchild component 'GalleryItem' and pass it back up to the App.
@@ -31,16 +31,65 @@ function App() {
    after a delete and show the updated items from the db). Instead, I passed the item id back to parent!
 */
   const handleDeleteEvent = ( item )=>{
-      axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
-          console.log( response.data );
-          //TODO: Replace with SWAL
-          alert( `Image deleted successfully`)
-          getItems();
-      }).catch( ( error ) =>{
-          alert('error');
-          console.log( error );
-      })
-  }
+    Swal.fire({
+      title: 'Would you like to delete the image?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#4CAF50',
+      denyButtonText: `No`,
+      denyButtonColor: '#78808C',
+    }).then( ( result ) => {
+      if ( result.isConfirmed ) {    
+        axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
+          //use sweetalert functionality
+          Swal.fire({
+            title: 'Success!',
+            text: "Item deleted!",
+            icon: 'success',
+            showCancelButton: false,
+            showCloseButton: true,
+            confirmButtonColor: '#3da133',
+            confirmButtonText: 'Ok!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                getItems();
+            }
+          })   
+        }).catch( ( error ) =>{
+            console.log( error );
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops, something went wrong!',
+              text: 'There was an error removing the item.',
+              footer: 'Check console for details.'
+            })             
+        })
+      }
+    })
+}
+    
+      // axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
+      //   console.log( response.data );
+      //   //use sweetalert functionality
+      //   Swal.fire({
+      //     title: 'Success!',
+      //     text: "Item deleted!",
+      //     icon: 'success',
+      //     showCancelButton: false,
+      //     showCloseButton: true,
+      //     confirmButtonColor: '#3da133',
+      //     confirmButtonText: 'Ok!'
+      //   }).then((result) => {
+      //     if (result.isConfirmed) {
+      //         getItems();
+      //     }
+      //   })   
+      // }).catch( ( error ) =>{
+      //     alert('error');
+      //     console.log( error );
+      // })
+      //}
 
   /*
   #1 - Get the image URL from the URL input.
@@ -53,14 +102,10 @@ function App() {
       pass the item back up to the App.
   #6 - In App, we call handleAddEvent with the item that came from the GalleryItem.
   */
-  const handleAddEvent = ( ) =>{
-    console.log( `in handleAddEvent with:`, imageURL, imageDescription );
-    alert( `in handleAddEvent` );
-    
+  const handleAddEvent = ( ) =>{    
     let newItem = createItemObject( imageURL, imageDescription );
 
     axios.post( `/gallery`, newItem ).then( ( response )=>{
-      alert(` Image added successfully!` );
       getItems();
     }).catch( ( error ) =>{
       alert( 'Error adding image!' );
@@ -70,31 +115,30 @@ function App() {
 /**
  * Create the task object to send to the database.
  */
+//TO DO: Ask Dev if it is better to pass path and description down to GalleryItem component
+//rather than creating it in the App component.
   const createItemObject = ( imageURL, imageDescription ) => {
-    console.log( `in createIteamObject with:`, imageURL, imageDescription )
     let item = {
         id : '',
         path: imageURL,
         description: imageDescription,
         likes: 0
     };
-    console.log( `item to be returned is:`, item )
   return item;
 }
 
   const handleURLChange = ( event )=>{
     setImageURL(event.target.value);
-    console.log( imageURL );
   }
   const handleDescriptionChange = ( event )=>{
     setImageDescription(event.target.value);
-    console.log( imageDescription );
   }  
+
     //pass the array of items to the Body component for further processing/rendering
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Gallery of Images</h1>
+          <h1 className="App-title">Gallery of Bird Images</h1>
         </header>
 
         <div class="container">
