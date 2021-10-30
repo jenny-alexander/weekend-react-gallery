@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 
 // POST Route
 router.post('/', ( req, res ) => {
-    console.log( `in POST ROUTE with:`, req.body );
     const queryString = `INSERT INTO items (path, description )
                             VALUES($1, $2);`;    
     let values = [req.body.path, req.body.description];
@@ -30,7 +29,7 @@ router.post('/', ( req, res ) => {
     }).catch( ( error )=>{
             res.sendStatus( 500) ;
        })
-})
+}) // END POST Route
 
 // PUT Route
 router.put('/like/:id', (req, res) => {

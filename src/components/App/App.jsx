@@ -9,14 +9,17 @@ function App() {
   const [ imageURL, setImageURL ] = useState( '' );
   const [ imageDescription, setImageDescription ] = useState( '' );
 
+  /**
+   * When the page is loaded/rendered, get the items from database.
+   * useEffect() is similar to "$( document ).ready( onReady )" of jQuery.
+   */
   useEffect( ()=>{
       getItems();
-  }, []); //<-- SUPER IMPORTANT to put this empty array in here.
-
-  //get the items from the server using axios middleware call
+  }, []); //<-- Don't forget to put this empty array in here.
+/**
+ * Get the items from the server using axios middleware call
+*/ 
   const getItems=()=>{
-  console.log( `in getItems` );
-
     axios.get( '/gallery' ).then( ( response )=>{
       setGalleryItems( response.data );        
     }).catch( ( err ) =>{
@@ -24,12 +27,13 @@ function App() {
       console.log(err);       
     })
   }
-/* Get the item from the button click on grandchild component 'GalleryItem' and pass it back up to the App.
+/**
+*  Get the item from the button click on grandchild component 'GalleryItem' and pass it back up to the App.
    Using the item id and item, delete the item from the gallery.
    Note: I tried to do the delete on the GalleryItem component but had trouble figuring out how to get the
    parent state to change from GalleryItem (this (state change) is needed in order for the page to refresh
    after a delete and show the updated items from the db). Instead, I passed the item id back to parent!
-*/
+ */
   const handleDeleteEvent = ( item )=>{
     Swal.fire({
       title: 'Would you like to delete the image?',
@@ -68,55 +72,24 @@ function App() {
       }
     })
 }
-    
-      // axios.delete( `/gallery/delete/${item.id}`, item ).then( (response ) =>{
-      //   console.log( response.data );
-      //   //use sweetalert functionality
-      //   Swal.fire({
-      //     title: 'Success!',
-      //     text: "Item deleted!",
-      //     icon: 'success',
-      //     showCancelButton: false,
-      //     showCloseButton: true,
-      //     confirmButtonColor: '#3da133',
-      //     confirmButtonText: 'Ok!'
-      //   }).then((result) => {
-      //     if (result.isConfirmed) {
-      //         getItems();
-      //     }
-      //   })   
-      // }).catch( ( error ) =>{
-      //     alert('error');
-      //     console.log( error );
-      // })
-      //}
-
-  /*
-  #1 - Get the image URL from the URL input.
-  #2 - Get the desription from the input.
-  #3 - Pass values from #1 and #2 down to the GalleryList child component as PROPS.
-       On click, we want to pass itemURL and itemDescription as parameters to the function (which is being sent as a prop).
-       The function should return an item which will get sent to the handleAddEvent() function in the App component
-  #4 - GalleryList should pass these props down to the GalleryItem component.
-  #5 - In GalleryItem component, we create a new item using the setState and then
-      pass the item back up to the App.
-  #6 - In App, we call handleAddEvent with the item that came from the GalleryItem.
-  */
+/**
+ * When the user adds a new image, create a new item object and then pass that to axios.post
+ */
   const handleAddEvent = ( ) =>{    
-    let newItem = createItemObject( imageURL, imageDescription );
+    if ( imageURL && imageDescription !== '' ) {
+      let newItem = createItemObject( imageURL, imageDescription );
 
-    axios.post( `/gallery`, newItem ).then( ( response )=>{
-      getItems();
-    }).catch( ( error ) =>{
-      alert( 'Error adding image!' );
-      console.log( error );
-    })
+      axios.post( `/gallery`, newItem ).then( ( response )=>{
+        getItems();
+      }).catch( ( error ) =>{
+        alert( 'Error adding image!' );
+        console.log( error );
+      })
+    }
   }
 /**
  * Create the task object to send to the database.
  */
-//TO DO: Ask Dev if it is better to pass path and description down to GalleryItem component
-//rather than creating it in the App component.
   const createItemObject = ( imageURL, imageDescription ) => {
     let item = {
         id : '',
@@ -126,19 +99,26 @@ function App() {
     };
   return item;
 }
-
+/**
+ * Get the value that the user typed into the 'image URL' input element
+ */
   const handleURLChange = ( event )=>{
     setImageURL(event.target.value);
   }
+/**
+ * Get the value that the user typed into the 'image description' input element  
+ */ 
   const handleDescriptionChange = ( event )=>{
     setImageDescription(event.target.value);
   }  
-
-    //pass the array of items to the Body component for further processing/rendering
+  /**
+   * Render the page by passing the array of gallery items to the GalleryList component
+   */
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Gallery of Bird Images</h1>
+          <p className="birdQuote">In order to see birds it is necessary to become part of the silence. -Robert Lynd</p>
         </header>
 
         <div class="container">
@@ -146,16 +126,19 @@ function App() {
           <div className="itemInput">
             <form>
               <div class="row">
+                <p id="addImageTitle">Add an image:</p>
+              </div>
+              <div class="row">
                 <div class="col-5">
                   <input type="text" class="form-control" id="imageURL" placeholder="Enter image URL here"
-                          onChange= { ( event )=>handleURLChange ( event ) }/>
+                          onChange= { ( event )=>handleURLChange ( event ) } required/>
                 </div>
                 <div class="col-5">
                   <input type="text" class="form-control" id="imageDescription" placeholder="Enter image description here"
-                          onChange={ ( event )=>handleDescriptionChange( event ) }/>
+                          onChange={ ( event )=>handleDescriptionChange( event ) } required />
                 </div>                
                 <div class="col-2">
-                  <button class="btn btn-outline-secondary" onClick={ handleAddEvent }>Add</button>
+                  <button id="addButton" class="btn btn-secondary" onClick={ handleAddEvent }>Add</button>
                 </div>
               </div>
 
@@ -171,7 +154,7 @@ function App() {
             </div>
           </div>
         </div>
-
+      <p id="copyright">&#169; Images courtesy of The Cornell Lab of Ornithology</p>
       </div>
     );
 }
