@@ -38,6 +38,17 @@ function App() {
       })
   }
 
+  /*
+  #1 - Get the image URL from the URL input.
+  #2 - Get the desription from the input.
+  #3 - Pass values from #1 and #2 down to the GalleryList child component as PROPS.
+       On click, we want to pass itemURL and itemDescription as parameters to the function (which is being sent as a prop).
+       The function should return an item which will get sent to the handleAddEvent() function in the App component
+  #4 - GalleryList should pass these props down to the GalleryItem component.
+  #5 - In GalleryItem component, we create a new item using the setState and then
+      pass the item back up to the App.
+  #6 - In App, we call handleAddEvent with the item that came from the GalleryItem.
+  */
   const handleAddEvent = ( item )=>{
     axios.post( `/gallery`, item ).then( ( response )=>{
       alert(` Image added successfully!` );
@@ -57,38 +68,32 @@ function App() {
         <div class="container">
 
           <div className="itemInput">
-            {/* <input type="text" placeholder="First name"/>
-            <button type="button" class="btn btn-outline-secondary">This is a button</button> */}
-
             <form>
-              <div class="row">
-                <div class="col-9">
+              <div class="row g-2">
+                <div class="col-6">
                   <input type="text" class="form-control" id="imageURL" placeholder="Enter image URL here"/>
                 </div>
+                <div class="col-3">
+                  <input type="text" class="form-control" id="imageDescription" placeholder="Enter image description here"/>
+                </div>                
                 <div class="col-2">
-                  <button class="btn btn-outline-secondary">Add image</button>
+                  <button class="btn btn-outline-secondary" onClick={ handleAddEvent }>Add image</button>
                 </div>
               </div>
             </form>
-
-
           </div>
-
 
           <div className="outputList">
             <div class="d-flex flex-row">
-
                 <div className = "itemsList">
                     <GalleryList galleryItems={galleryItems} 
                                 handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
                 </div>
             </div>
           </div>
-
         </div>
 
       </div>
-
     );
 }
 
