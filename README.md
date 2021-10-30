@@ -2,7 +2,7 @@
 
 ## Description
 
-The objective of this weekend challenge was to build an image gallery that uses React as the main building block of the user interface components. We were asked to display images that are significant to us. I chose to build a gallery of bird images because being outdoors has always been a big part of my life. I used to go bird watching with my parents as a child and enjoyed that very much.
+The objective of this weekend challenge was to build an image gallery that uses React as the main building block of the user interface components. We were asked to display images that are significant to us. I chose to build a gallery of bird images because being outdoors has always been a big part of my life. I used to go bird watching with my parents as a child and enjoyed it very much.
 
 The image gallery should:
 
@@ -14,17 +14,17 @@ The image gallery should:
 Note: Images themselves are not stored in the database. Rather, a path to the image is stored.
 Disclaimer: At this time, only images from the internet (with URL) can be added to the image gallery. A future challenge would be to allow a user to add an image from another source (local drive, Google drive, dropbox, etc).
 
-## Application demo
+## Application Demo
 
-![To-do list application](server/public/images/to_do_list_in_action.gif)
+![Image Gallery application](public/images/react_gallery_demo.gif)
 
-## Screenshot of database
+## Screenshot of Database
 
-![To-do list database](server/public/images/sql_todo_list_db.png)
+![Image Gallery database](public/images/react_gallery_db.png)
 
 ### Prerequisites
 
-The following should be installed before attempting to use the to-do list:
+The following should be installed before attempting to use the image gallery:
 
 - [Express](https://expressjs.com/en/starter/installing.html) - a web framework for Node.js
 - [Postgresql](https://www.postgresql.org/) - an open source relational database
@@ -33,8 +33,8 @@ The following should be installed before attempting to use the to-do list:
 
 In order to get the to-do list up and running, do the following:
 
-1. Download code locally from github.
-2. Create the database and corresponding table:
+1. Download code locally from GitHub.
+2. Create the database and corresponding table by doing the following:
 
 - Using your favorite relational database client (I use Postico(<https://eggerapps.at/postico/>), go to the SQL Query tab that allows you to run a query. Run the 'CREATE DATABASE' query found in the *Create database.sql* file. This will create the react_gallery database.
 - Then, within the react_gallery database, run the 'CREATE TABLE' query found in the *Create database.sql* file. This will create the tasks table.
@@ -52,7 +52,7 @@ In order to get the to-do list up and running, do the following:
 
 3. A user can view the image description by clicking on the image.
 
-4. A user can delete image from the gallery. This is done by clicking on the garbage button. The image will be deleted from the database.
+4. A user can delete an image from the gallery by clicking on the garbage can button. The image will be deleted from the database.
 
 ## Built With/Using
 
@@ -68,11 +68,11 @@ In order to get the to-do list up and running, do the following:
 
 ## Acknowledgement
 
-- Thanks to our fearless leader, Dev Jana!
+- Thanks to our fearless instructor, Dev Jana! His easy-going nature and patience are truly what make him a great teacher.
 - Thanks to [Prime Digital Academy](www.primeacademy.io) for providing all Prime students with the opportunity to make substantial changes in their lives by learning how to program and how to think like a programmer.
 
 ## Support
 
-- Thank you to my fellow Ionian cohort members for interesting conversations about how to make our projects work! They all offer significant and interesting thoughts, ideas and approaches.
+- Thank you to my fellow Ionian cohort members for interesting conversations about how to make our projects work. They all offer interesting thoughts, ideas and approaches. Best of all, they are awesome human beings!
 
 If you have suggestions or questions, please email me at <jenny_alexander@icloud.com>.
