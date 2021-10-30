@@ -2,7 +2,9 @@
 
 ## Description
 
-The objective of this weekend challenge was to build an image gallery that uses React as the main building block of the user interface components. We were asked to display images that are significant to us. I chose to build a gallery of bird images because being outdoors has always been a big part of my life. I used to go bird watching with my parents as a child and enjoyed it very much.
+The objective of this weekend challenge was to build an image gallery that uses React as the main building block of the user interface components. We were asked to display images that are significant to us.
+
+I chose to build a gallery of *bird images* because being outdoors has always been a big part of my life. I used to go bird watching with my parents as a child and enjoyed it very much.
 
 The image gallery should:
 
@@ -11,8 +13,10 @@ The image gallery should:
 - allow a user to DELETE an image from the image gallery.
 - allow a user to UPDATE an image by clicking on the "love" button.
 - allow a user to VIEW the image description by clicking on the image.
-Note: Images themselves are not stored in the database. Rather, a path to the image is stored.
-Disclaimer: At this time, only images from the internet (with URL) can be added to the image gallery. A future challenge would be to allow a user to add an image from another source (local drive, Google drive, dropbox, etc).
+
+**Note 1:** Images themselves are not stored in the database. Rather, a path to the image is stored.
+
+**Note 2:** At this time, only images from the internet (with URL) can be added to the image gallery. A future challenge would be to allow a user to add an image from another source (local drive, Google drive, dropbox, etc).
 
 ## Application Demo
 
@@ -36,8 +40,10 @@ In order to get the to-do list up and running, do the following:
 1. Download code locally from GitHub.
 2. Create the database and corresponding table by doing the following:
 
-- Using your favorite relational database client (I use Postico(<https://eggerapps.at/postico/>), go to the SQL Query tab that allows you to run a query. Run the 'CREATE DATABASE' query found in the *Create database.sql* file. This will create the react_gallery database.
-- Then, within the react_gallery database, run the 'CREATE TABLE' query found in the *Create database.sql* file. This will create the tasks table.
+- Using your favorite relational database client (I use Postico(<https://eggerapps.at/postico/>), go to the SQL Query tab that allows you to run a query. Using the queries from the *Create Database.sql* file, do the following:
+- Run the 'CREATE DATABASE' query. This will create the react_gallery database.
+- Then, within the react_gallery database, run the 'CREATE TABLE' query. This will create the tasks table.
+- Finally, run the 'INSERT INTO' query. This will insert a few images into the database for the web application to use.
 
 3. Launch the application locally.
 
