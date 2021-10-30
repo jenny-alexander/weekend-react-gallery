@@ -40,7 +40,11 @@ function App() {
 
   const handleAddEvent = ( item )=>{
     axios.post( `/gallery`, item ).then( ( response )=>{
-
+      alert(` Image added successfully!` );
+      getItems();
+    }).catch( ( error ) =>{
+      alert( 'Error adding image!' );
+      console.log( error );
     })
   }
     //pass the array of items to the Body component for further processing/rendering
@@ -50,18 +54,40 @@ function App() {
           <h1 className="App-title">Gallery of Images</h1>
         </header>
 
+        <div class="container">
 
+          <div className="itemInput">
+            {/* <input type="text" placeholder="First name"/>
+            <button type="button" class="btn btn-outline-secondary">This is a button</button> */}
 
-          <div class="d-flex flex-row">
-              <div className = "itemsList">
-                  <GalleryList galleryItems={galleryItems} 
-                               handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
+            <form>
+              <div class="row">
+                <div class="col-9">
+                  <input type="text" class="form-control" id="imageURL" placeholder="Enter image URL here"/>
+                </div>
+                <div class="col-2">
+                  <button class="btn btn-outline-secondary">Add image</button>
+                </div>
               </div>
+            </form>
+
+
+          </div>
+
+
+          <div className="outputList">
+            <div class="d-flex flex-row">
+
+                <div className = "itemsList">
+                    <GalleryList galleryItems={galleryItems} 
+                                handleDelete={ ( itemFromGallery ) =>{ handleDeleteEvent( itemFromGallery ) } }/> 
+                </div>
+            </div>
           </div>
 
         </div>
 
-   
+      </div>
 
     );
 }
