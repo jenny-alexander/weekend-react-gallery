@@ -22,8 +22,6 @@ router.post('/', ( req, res ) => {
     const queryString = `INSERT INTO items (path, description )
                             VALUES($1, $2);`;    
     let values = [req.body.path, req.body.description];
-    console.log( `QuerySTring is:`, queryString );
-    console.log( `values are:`, values );
     pool.query( queryString, values ).then( ( results )=>{
         res.sendStatus( 201 );
     }).catch( ( error )=>{
@@ -49,7 +47,7 @@ router.delete( '/delete/:id', ( req, res )=>{
     pool.query( queryString ).then( ( results )=>{
         res.sendStatus( 200 );
     }).catch( ( error )=>{
-        console.log( error );
+        console.log( `DELETE error is:`, error );
         res.sendStatus( 500 );
     })
 }) // END DELETE Route

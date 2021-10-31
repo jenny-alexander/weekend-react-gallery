@@ -9,10 +9,10 @@ function App() {
   const [ imageURL, setImageURL ] = useState( '' );
   const [ imageDescription, setImageDescription ] = useState( '' );
 
-  /**
-   * When the page is loaded/rendered, get the items from database.
-   * useEffect() is similar to "$( document ).ready( onReady )" of jQuery.
-   */
+/**
+* When the page is loaded/rendered, get the items from database.
+* useEffect() is similar to "$( document ).ready( onReady )" of jQuery.
+*/
   useEffect( ()=>{
       getItems();
   }, []); //<-- Don't forget to put this empty array in here.
@@ -88,7 +88,7 @@ function App() {
     }
   }
 /**
- * Create the task object to send to the database.
+ * Create the item object to send to the database.
  */
   const createItemObject = ( imageURL, imageDescription ) => {
     let item = {

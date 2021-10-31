@@ -3,12 +3,16 @@ import './GalleryList.css';
 import GalleryItem from '../GalleryItem/GalleryItem';
 
 function GalleryList( props ) {
-    
+/**
+ * handle the delete function coming from the GalleryItem to be passed back to the App
+ */    
     const handleDelete = ( itemDeleted )=>{
         return itemDeleted;
     }
-/* Loop through each individual item in galleryItems array and pass it to the GalleryItem component 
-   for further processing/rendering */
+/**
+ * Loop through each individual item in galleryItems array and pass it to the GalleryItem component
+ * for further processing/rendering 
+*/ 
     return (
         <div className="list">
             <div class="d-flex flex-wrap">

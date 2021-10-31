@@ -2,37 +2,33 @@ import React from 'react';
 import axios from 'axios';
 import './GalleryItem.css';
 import { useState } from 'react';
-//import { response } from 'express';
 
 function GalleryItem( props ) {
     const NO_PEOPLE_LOVE = `No people love this :(`;
     const ONE_PERSON_LOVE = ` person loves this!`;
     const MANY_PEOPLE_LOVE = ` people love this!`;
-
-    //when the item is rendered on the screen it should be created with it's properties from the server
+/**
+ * when the item is rendered on the screen it should be created with it's properties from the server
+*/
     const [ item, setItem ] = useState ( {
         id: props.item.id,
         path: props.item.path,
         description: props.item.description,
         likes: props.item.likes
     });
-
-    //set the 'show' state of the image or description
+/**
+ * set the 'show' state of the image or description
+*/   
     const[show, setShow] = useState(  true );   
-
-    //show or hide the image/desription depending on the value of show
+/**
+ * show or hide the image/desription depending on the value of show
+*/
     const toggleItem = () => {
         setShow( !show );
     }
-
-    //create a new item
-    const createNewItem = ( newUrl, newDescription )=>{
-        setItem( {
-            ...item, path: newUrl, description: newDescription
-        })
-    }
-
-    //increase the number of loves by 1 each time a user clicks on the loves button
+/**
+ * increase the number of loves by 1 each time a user clicks on the loves button
+ */
     const increaseCount = ( )=>{
         setItem( {
             ...item, likes: ++item.likes 
@@ -40,9 +36,10 @@ function GalleryItem( props ) {
         //make a call to server via axios
         updatePhotoLikes();
     }
-
-    //update (PUT) the likes value for this item on the server
-    //use axios as middleware to the server
+/**
+ *  update (PUT) the likes value for this item on the server
+ *  use axios as middleware to the server
+ */    
     const updatePhotoLikes = ( ) =>{
         axios.put( `/gallery/like/${item.id}`, item ).then( ( response )=>{
             console.log( response.data );    
@@ -51,9 +48,11 @@ function GalleryItem( props ) {
             console.log( error );
         });
     }    
-
-    //determine the text to show on the screen - depends on how many people love the image
+/**
+ * determine the text to show on the screen - depends on how many people love the image
+ */ 
     const getCountText = ()=>{
+       
         let text = NO_PEOPLE_LOVE;
         if( item.likes !== 0 ) {
             if( item.likes === 1 ) {
@@ -64,8 +63,9 @@ function GalleryItem( props ) {
         }
         return text;
     }
-  
-    //render the output to the screen
+/**
+ * render the output to the screen
+ */
     return (
         <div className="item">
             <div className="itemImage">
