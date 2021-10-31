@@ -35,7 +35,7 @@ The following should be installed before attempting to use the image gallery:
 
 ## Installation
 
-In order to get the to-do list up and running, do the following:
+In order to get the image gallery application up and running, do the following:
 
 1. Download code locally from GitHub.
 2. Create the database and corresponding table by doing the following:
