@@ -6,13 +6,15 @@ The objective of this weekend challenge was to build an image gallery that uses 
 
 I chose to build a gallery of *bird images* because being outdoors has always been a big part of my life. I used to go bird watching with my parents as a child and enjoyed it very much.
 
-The image gallery should:
+Image gallery requirements:
 
 - DISPLAY images from the relational database and display on the front-end.
 - allow a user to ADD an image to the image gallery.
 - allow a user to DELETE an image from the image gallery.
 - allow a user to UPDATE an image by clicking on the "love" button.
 - allow a user to VIEW the image description by clicking on the image.
+
+The base mode took me approximately **5** hours. The completed application (with stretch goals & Bootstrap styling) took me a full **15** hours to do.
 
 **Note 1:** Images themselves are not stored in the database. Rather, a path to the image is stored.
 
